@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - IMMUDB_HOST=immudb
+      - IMMUDB_PORT=8080
+      - PORT=3000
+    volumes:
+      - .:/usr/src/app
+    command: yarn dev
+
+volumes:
+  immudb_data:

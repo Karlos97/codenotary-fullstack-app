@@ -1,12 +1,12 @@
 import express from "express";
 import { json } from "body-parser";
 import "dotenv/config";
-// import accountingRouter from "./accountingRouter";
+import accountingRouter from "./accountingRouter";
 
 const app = express();
 app.use(json());
 
-// app.use("/api/accounting", accountingRouter);
+app.use("/api/accounting", accountingRouter);
 
 const PORT = process.env.PORT || 3000;
 

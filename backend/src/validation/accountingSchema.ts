@@ -1,14 +1,12 @@
 import Joi from "joi";
 
 export const putAccountingSchema = Joi.object({
-  data: Joi.object({
-    accountNumber: Joi.string().required(),
-    accountName: Joi.string().required(),
-    iban: Joi.string().required(),
-    address: Joi.string().required(),
-    amount: Joi.number().positive().required(),
-    type: Joi.string().valid("sending", "receiving").required(),
-  }).required(),
+  accountNumber: Joi.string().required(),
+  accountName: Joi.string().required(),
+  iban: Joi.string().required(),
+  address: Joi.string().required(),
+  amount: Joi.number().positive().required(),
+  type: Joi.string().valid("sending", "receiving").required(),
 });
 
 export const getAccountingSchema = Joi.object({

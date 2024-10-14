@@ -13,9 +13,7 @@ accountingRouter.post("/", async (req: Request, res: Response) => {
       return;
     }
 
-    const { data } = value;
-
-    await setValue(data);
+    await setValue(value);
 
     res.status(201).json({ message: "Accounting information added." });
   } catch (error) {

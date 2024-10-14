@@ -3,7 +3,7 @@ import https from "https";
 import "dotenv/config";
 
 const IMMUDB_PUT_URL = `https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/document`;
-const IMMUDB_GET_URL = `https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/documents/search`;
+// const IMMUDB_GET_URL = `https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/documents/search`;
 const IMMUDB_API_KEY = process.env.IMMUDB_API_KEY || "";
 
 if (!IMMUDB_API_KEY) {
@@ -27,7 +27,7 @@ const immudbClient: AxiosInstance = axios.create({
  */
 export const setValue = async (value: any): Promise<void> => {
   try {
-    await immudbClient.put(IMMUDB_PUT_URL, value);
+    await immudbClient.put(IMMUDB_PUT_URL, { data: value });
   } catch (error) {
     console.error(`Error setting data:`, error);
     throw error;

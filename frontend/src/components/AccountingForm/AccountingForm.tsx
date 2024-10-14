@@ -4,12 +4,15 @@ import { z } from "zod";
 import Input from "@atoms/Input/Input";
 import Select from "@atoms/Select/Select";
 import Button from "@atoms/Button/Button";
+import useErrorNotification from "@hooks/useErrorNotification";
+import ErrorNotification from "@atoms/ErrorNotification/ErrorNotification";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const formSchema = z.object({
-  accountNumber: z.string().nonempty("Account Number is required"),
-  accountName: z.string().nonempty("Account Name is required"),
-  iban: z.string().nonempty("IBAN is required"),
-  address: z.string().nonempty("Address is required"),
+  accountNumber: z.string().min(1, "Account Number is required"),
+  accountName: z.string().min(1, "Account Name is required"),
+  iban: z.string().min(1, "IBAN is required"), // could be improved to real IBAN pattern, but it doesn't really matter in this example project
+  address: z.string().min(1, "Address is required"),
   amount: z
     .number({ invalid_type_error: "Amount must be a number" })
     .positive("Amount must be greater than zero"),
@@ -20,11 +23,35 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-interface AccountingFormProps {
-  onAddRecord: (data: FormData) => void;
-}
+const AccountingForm = () => {
+  const queryClient = useQueryClient();
+  const { error, visible, triggerError } = useErrorNotification();
 
-const AccountingForm = ({ onAddRecord }: AccountingFormProps) => {
+  const mutation = useMutation({
+    mutationFn: async (data: FormData) => {
+      const response = await fetch(
+        `${import.meta.env.VITE_IMMUDB_LOCALHOST_BACKEND_LINK}/api/accounting`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to add record");
+      }
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["records"] });
+    },
+    onError: (error: { message: string }) => {
+      triggerError(error.message || "Failed to add record. Please try again.");
+    },
+  });
+
   const {
     register,
     handleSubmit,
@@ -34,8 +61,8 @@ const AccountingForm = ({ onAddRecord }: AccountingFormProps) => {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (data: FormData) => {
-    onAddRecord(data);
+  const onSubmit = async (data: FormData) => {
+    mutation.mutate(data);
     reset();
   };
 
@@ -69,7 +96,8 @@ const AccountingForm = ({ onAddRecord }: AccountingFormProps) => {
         {...register("type")}
         error={errors.type}
       />
-      <Button type="submit" label="Add Record" />
+      <Button type="submit">Add Record</Button>
+      <ErrorNotification error={error} visible={visible} />
     </form>
   );
 };

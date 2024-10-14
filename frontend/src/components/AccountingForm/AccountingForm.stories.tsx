@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import AccountingForm from "./AccountingForm";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const meta = {
   title: "Example/AccountingForm",
@@ -8,16 +11,17 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
-  args: {
-    onAddRecord: (data: any) => console.log("Record added:", data),
-  },
+  args: {},
 } satisfies Meta<typeof AccountingForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {
-    onAddRecord: (data: any) => console.log("Record added:", data),
-  },
+  render: (args) => (
+    <QueryClientProvider client={queryClient}>
+      <AccountingForm {...args} />
+    </QueryClientProvider>
+  ),
+  args: {},
 };

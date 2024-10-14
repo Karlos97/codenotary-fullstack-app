@@ -9,7 +9,7 @@ const meta = {
     layout: "fullscreen",
   },
   args: {
-    label: "Submit",
+    children: "Submit",
   },
 } satisfies Meta<typeof Button>;
 
@@ -18,6 +18,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: "Submit",
+    children: "Submit",
   },
 };

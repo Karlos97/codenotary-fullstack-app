@@ -13,4 +13,11 @@ export default defineConfig({
       "@hooks": path.resolve(__dirname, "./src/helpers/hooks"),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler",
+      },
+    },
+  },
 });

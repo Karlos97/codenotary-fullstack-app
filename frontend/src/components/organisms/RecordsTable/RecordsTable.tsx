@@ -1,9 +1,9 @@
-import IconLeft from "@/components/atoms/Icons/IconLeft";
-import IconRight from "@/components/atoms/Icons/IconRight";
-import PaginationButton from "@/components/atoms/PaginationButton/PaginationButton";
-import { fetchRecords } from "@/helpers/fetchRecords";
-import { useQuery } from "@tanstack/react-query";
-import { ReactNode, useState } from "react";
+import IconLeft from '@/components/atoms/Icons/IconLeft';
+import IconRight from '@/components/atoms/Icons/IconRight';
+import PaginationButton from '@/components/atoms/PaginationButton/PaginationButton';
+import { fetchRecords } from '@/helpers/fetchRecords';
+import { useQuery } from '@tanstack/react-query';
+import { ReactNode, useState } from 'react';
 
 interface Data {
   page: number;
@@ -41,7 +41,7 @@ interface TableDataProps {
 
 const TableData = ({
   children,
-  className = "",
+  className = '',
   colSpan = 1,
 }: TableDataProps) => (
   <td
@@ -57,7 +57,7 @@ const RecordsTable = () => {
   const perPage = 15;
 
   const { data, error, isLoading } = useQuery<Data>({
-    queryKey: ["records", pageNumber, perPage],
+    queryKey: ['records', pageNumber, perPage],
     queryFn: () => fetchRecords({ page: pageNumber, perPage }),
   });
 
@@ -93,7 +93,7 @@ const RecordsTable = () => {
                     <TableData>{timestamp}</TableData>
                     <TableData>{JSON.stringify(rest)}</TableData>
                   </tr>
-                )
+                ),
               )}
             </tbody>
           ) : (

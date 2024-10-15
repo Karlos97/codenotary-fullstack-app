@@ -1,5 +1,5 @@
-import Button from "@/components/atoms/Button/Button";
-import { ReactNode } from "react";
+import Button from '@/components/atoms/Button/Button';
+import { ReactNode } from 'react';
 
 interface ModalProps {
   title: string;

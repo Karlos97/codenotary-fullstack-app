@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const useErrorNotification = () => {
   const [error, setError] = useState<string | null>(null);

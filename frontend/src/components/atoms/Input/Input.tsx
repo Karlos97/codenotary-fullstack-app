@@ -1,5 +1,5 @@
-import React from "react";
-import { FieldError } from "react-hook-form";
+import React from 'react';
+import { FieldError } from 'react-hook-form';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -19,14 +19,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         id={name}
         name={name}
         className={`w-full px-3 py-2 border rounded ${
-          error ? "border-red-500" : "border-gray-300"
+          error ? 'border-red-500' : 'border-gray-300'
         }`}
         ref={ref}
         {...rest}
       />
       {error && <p className="mt-1 text-xs text-red-500">{error.message}</p>}
     </div>
-  )
+  ),
 );
 
 export default Input;

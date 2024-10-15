@@ -1,5 +1,5 @@
-import React from "react";
-import { FieldError } from "react-hook-form";
+import React from 'react';
+import { FieldError } from 'react-hook-form';
 
 interface Option {
   value: string;
@@ -24,7 +24,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         id={name}
         name={name}
         className={`w-full px-3 py-2 border rounded ${
-          error ? "border-red-500" : "border-gray-300"
+          error ? 'border-red-500' : 'border-gray-300'
         }`}
         {...rest}
         ref={ref}
@@ -38,7 +38,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       </select>
       {error && <p className="mt-1 text-xs text-red-500">{error.message}</p>}
     </div>
-  )
+  ),
 );
 
 export default Select;

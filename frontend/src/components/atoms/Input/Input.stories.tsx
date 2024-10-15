@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Input from "./Input";
+import type { Meta, StoryObj } from '@storybook/react';
+import Input from './Input';
 
 const meta = {
-  title: "Example/Input",
+  title: 'Example/Input',
   component: Input,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
   },
   args: {
-    label: "Account Number",
-    name: "accountNumber",
+    label: 'Account Number',
+    name: 'accountNumber',
   },
 } satisfies Meta<typeof Input>;
 
@@ -19,15 +19,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: "Account Number",
-    name: "accountNumber",
+    label: 'Account Number',
+    name: 'accountNumber',
   },
 };
 
 export const WithError: Story = {
   args: {
-    label: "Account Number",
-    name: "accountNumber",
-    error: { message: "This field is required", type: "required" },
+    label: 'Account Number',
+    name: 'accountNumber',
+    error: { message: 'This field is required', type: 'required' },
   },
 };

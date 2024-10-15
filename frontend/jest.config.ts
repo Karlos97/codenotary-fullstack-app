@@ -1,22 +1,22 @@
-import type { Config } from "@jest/types";
+import type { Config } from '@jest/types';
 
 const config: Config.InitialOptions = {
-  preset: "ts-jest",
-  testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-  testPathIgnorePatterns: ["./node_modules/", "./dist/"],
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  testPathIgnorePatterns: ['./node_modules/', './dist/'],
   moduleNameMapper: {
-    "\\.(css|less|sass|scss)$": "identity-obj-proxy",
-    "^@/(.*)$": "<rootDir>/src/$1",
-    "^@components/(.*)$": "<rootDir>/src/components/$1",
-    "^@atoms/(.*)$": "<rootDir>/src/components/atoms/$1",
-    "^@organisms/(.*)$": "<rootDir>/src/components/organisms/$1",
-    "^@hooks/(.*)$": "<rootDir>/src/helpers/hooks/$1",
+    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^@components/(.*)$': '<rootDir>/src/components/$1',
+    '^@atoms/(.*)$': '<rootDir>/src/components/atoms/$1',
+    '^@organisms/(.*)$': '<rootDir>/src/components/organisms/$1',
+    '^@hooks/(.*)$': '<rootDir>/src/helpers/hooks/$1',
   },
   transform: {
-    "^.+\\.tsx?$": [
-      "ts-jest",
+    '^.+\\.tsx?$': [
+      'ts-jest',
       {
         diagnostics: {
           ignoreCodes: [1343],
@@ -24,9 +24,9 @@ const config: Config.InitialOptions = {
         astTransformers: {
           before: [
             {
-              path: "node_modules/ts-jest-mock-import-meta",
+              path: 'node_modules/ts-jest-mock-import-meta',
               options: {
-                metaObjectReplacement: { url: "https://www.url.com" },
+                metaObjectReplacement: { url: 'https://www.url.com' },
               },
             },
           ],

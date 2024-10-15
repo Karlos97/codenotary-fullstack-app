@@ -1,10 +1,10 @@
-import { useState } from "react";
-import AccountingForm from "@components/AccountingForm/AccountingForm";
-import RecordsTable from "@components/organisms/RecordsTable/RecordsTable";
-import Header from "@organisms/Header/Header";
-import Footer from "@organisms/Footer/Footer";
-import Modal from "@organisms/Modal/Modal";
-import Button from "./components/atoms/Button/Button";
+import { useState } from 'react';
+import AccountingForm from '@components/AccountingForm/AccountingForm';
+import RecordsTable from '@components/organisms/RecordsTable/RecordsTable';
+import Header from '@organisms/Header/Header';
+import Footer from '@organisms/Footer/Footer';
+import Modal from '@organisms/Modal/Modal';
+import Button from './components/atoms/Button/Button';
 
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

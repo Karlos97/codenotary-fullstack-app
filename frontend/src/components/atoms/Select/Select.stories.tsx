@@ -1,19 +1,19 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Select from "./Select";
+import type { Meta, StoryObj } from '@storybook/react';
+import Select from './Select';
 
 const meta = {
-  title: "Example/Select",
+  title: 'Example/Select',
   component: Select,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
   },
   args: {
-    label: "Type",
-    name: "type",
+    label: 'Type',
+    name: 'type',
     options: [
-      { value: "sending", label: "Sending" },
-      { value: "receiving", label: "Receiving" },
+      { value: 'sending', label: 'Sending' },
+      { value: 'receiving', label: 'Receiving' },
     ],
   },
 } satisfies Meta<typeof Select>;
@@ -23,11 +23,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: "Type",
-    name: "type",
+    label: 'Type',
+    name: 'type',
     options: [
-      { value: "sending", label: "Sending" },
-      { value: "receiving", label: "Receiving" },
+      { value: 'sending', label: 'Sending' },
+      { value: 'receiving', label: 'Receiving' },
     ],
   },
 };

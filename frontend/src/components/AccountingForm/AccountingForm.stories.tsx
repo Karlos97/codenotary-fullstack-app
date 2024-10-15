@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import AccountingForm from "./AccountingForm";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import type { Meta, StoryObj } from '@storybook/react';
+import AccountingForm from './AccountingForm';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
 const meta = {
-  title: "Example/AccountingForm",
+  title: 'Example/AccountingForm',
   component: AccountingForm,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
   },
   args: {},
 } satisfies Meta<typeof AccountingForm>;

@@ -6,16 +6,6 @@ import Footer from "@organisms/Footer/Footer";
 import Modal from "@organisms/Modal/Modal";
 import Button from "./components/atoms/Button/Button";
 
-interface Record {
-  id: number;
-  accountNumber: string;
-  accountName: string;
-  iban: string;
-  address: string;
-  amount: number;
-  type: string;
-}
-
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 

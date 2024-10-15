@@ -67,7 +67,7 @@ const AccountingForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Input
         label="Account Number"
         {...register("accountNumber")}

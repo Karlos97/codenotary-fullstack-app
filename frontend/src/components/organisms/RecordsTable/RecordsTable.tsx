@@ -32,8 +32,22 @@ const TableHeader = ({ children }: { children: ReactNode }) => (
     {children}
   </th>
 );
-const TableData = ({ children }: { children: ReactNode }) => (
-  <td className="whitespace-nowrap px-4 py-2 font-medium text-slate-700">
+
+interface TableDataProps {
+  children: ReactNode;
+  className?: string;
+  colSpan?: number;
+}
+
+const TableData = ({
+  children,
+  className = "",
+  colSpan = 1,
+}: TableDataProps) => (
+  <td
+    className={`${className} whitespace-nowrap px-4 py-2 font-medium text-slate-700`}
+    colSpan={colSpan}
+  >
     {children}
   </td>
 );
@@ -56,9 +70,9 @@ const RecordsTable = () => {
   }
 
   return (
-    <div className="rounded-lg border border-gray-300 dark:border-gray-200">
+    <div className="rounded-lg border border-gray-300 dark:border-gray-400">
       <div className="overflow-x-auto rounded-t-lg">
-        <table className="min-w-full divide-y-2 text-sm bg-gray-50 dark:bg-gray-400">
+        <table className="min-w-full divide-y-2 text-sm bg-gray-50 dark:bg-gray-400 divide-gray-50 dark:divide-gray-500">
           <thead>
             <tr>
               <TableHeader>Id</TableHeader>
@@ -67,20 +81,28 @@ const RecordsTable = () => {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-200">
-            {data?.revisions.map(
-              ({ document: { _id, timestamp, ...rest } }) => (
-                <tr
-                  key={_id}
-                  className="bg-gray-50 dark:bg-gray-400 hover:bg-gray-50 dark:hover:bg-gray-500 "
-                >
-                  <TableData>{_id}</TableData>
-                  <TableData>{timestamp}</TableData>
-                  <TableData>{JSON.stringify(rest)}</TableData>
-                </tr>
-              )
-            )}
-          </tbody>
+          {data?.revisions.length ? (
+            <tbody className="divide-y divide-gray-200 dark:divide-gray-500">
+              {data?.revisions.map(
+                ({ document: { _id, timestamp, ...rest } }) => (
+                  <tr
+                    key={_id}
+                    className="bg-gray-50 dark:bg-gray-400 hover:bg-gray-200 dark:hover:bg-gray-500 "
+                  >
+                    <TableData>{_id}</TableData>
+                    <TableData>{timestamp}</TableData>
+                    <TableData>{JSON.stringify(rest)}</TableData>
+                  </tr>
+                )
+              )}
+            </tbody>
+          ) : (
+            <tr>
+              <TableData className="text-center" colSpan={3}>
+                This page is empty!
+              </TableData>
+            </tr>
+          )}
         </table>
       </div>
 

@@ -17,7 +17,7 @@ Technologies used in the project:
 ### Comments
 
 The most time I've spend on configuration these technologies, but as it's already configured, It's giving a developer huge leverage to keep project simple, atomic, tested and well maintained.
-The're also huge help of supporting libraries of tailwind.
+There's also huge help of supporting libraries of tailwind. App is responsive and supports dark / light theme.
 
 I've not dedicated more time than it was needed to write more tests or storybook stories. The project is more or less a PoC how I do build apps and why I do choose such technologies(shortly described above).
 

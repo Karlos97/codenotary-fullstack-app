@@ -9,9 +9,9 @@ const ThemeButton = () => {
   return (
     <Button
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md dark:bg-yellow-500"
+      className="mt-4 px-4 py-2 bg-gray-50 dark:bg-gray-800 hover:bg-blue-500 hover:dark:bg-gray-600 text-gray-800 hover:text-white dark:text-white rounded-md cursor-pointer"
     >
-      {theme === "light" ? <SunIcon /> : <MoonIcon />}
+      {theme === "dark" ? <SunIcon /> : <MoonIcon />}
     </Button>
   );
 };

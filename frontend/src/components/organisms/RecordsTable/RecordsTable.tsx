@@ -40,7 +40,7 @@ const TableData = ({ children }: { children: ReactNode }) => (
 
 const RecordsTable = () => {
   const [pageNumber, setPageNumber] = useState(1);
-  const perPage = 20;
+  const perPage = 15;
 
   const { data, error, isLoading } = useQuery<Data>({
     queryKey: ["records", pageNumber, perPage],
@@ -58,7 +58,7 @@ const RecordsTable = () => {
   return (
     <div className="rounded-lg border border-gray-300 dark:border-gray-200">
       <div className="overflow-x-auto rounded-t-lg">
-        <table className="min-w-full divide-y-2 text-sm bg-white dark:bg-gray-400">
+        <table className="min-w-full divide-y-2 text-sm bg-gray-50 dark:bg-gray-400">
           <thead>
             <tr>
               <TableHeader>Id</TableHeader>
@@ -72,7 +72,7 @@ const RecordsTable = () => {
               ({ document: { _id, timestamp, ...rest } }) => (
                 <tr
                   key={_id}
-                  className="bg-white dark:bg-gray-400 hover:bg-gray-50 dark:hover:bg-gray-500 "
+                  className="bg-gray-50 dark:bg-gray-400 hover:bg-gray-50 dark:hover:bg-gray-500 "
                 >
                   <TableData>{_id}</TableData>
                   <TableData>{timestamp}</TableData>
@@ -84,7 +84,7 @@ const RecordsTable = () => {
         </table>
       </div>
 
-      <div className="rounded-b-lg border-t border-gray-200 px-4 py-2 bg-white dark:bg-gray-400">
+      <div className="rounded-b-lg border-t border-gray-200 px-4 py-2 bg-gray-50 dark:bg-gray-400">
         <ol className="flex justify-end gap-1 text-xs font-medium">
           <PaginationButton
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {

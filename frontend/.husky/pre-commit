@@ -1,0 +1,6 @@
+cd frontend
+yarn lint
+yarn test
+
+cd ../backend
+yarn lint

@@ -2,6 +2,8 @@
 
 Folders structure is divided on frontend / backend. Both folders have it's own README file describing further their technical details.
 
+The whole app is dedicated to ARM architecture.
+
 # Prerequisites
 
 - docker + docker-compose / docker desktop
@@ -11,12 +13,17 @@ Run `docker compose up -d` to run containers in detached mode.
 The app should be accessible on ports:
 
 - backend <strong>3000</strong>
-- frontend <strong>3001</strong>
+- frontend <strong>4173</strong>
 
-### Keep in mind to fulfill frontend / backend folders prerequisites.
+### Keep in mind to fulfill frontend / backend folders prerequisites to run app locally.
 
 - [Frontend README](frontend/README.md)
 - [Backend README](backend/README.md)
+
+### Husky
+
+Is being used as pre-commit helper running linting script.
+To add new scripts, use `/frontend/.husky/pre-commit` file and add scripts there.
 
 # Further development.
 

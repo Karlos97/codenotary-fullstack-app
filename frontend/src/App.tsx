@@ -1,7 +1,7 @@
 import RecordsPage from '@pages/RecordsPage/RecordsPage';
 
 const App = () => {
-  return <RecordsPage lalaas=asd />;
+  return <RecordsPage />;
 };
 
 export default App;

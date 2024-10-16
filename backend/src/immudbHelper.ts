@@ -25,6 +25,7 @@ const immudbClient: AxiosInstance = axios.create({
  * @param key - The key under which to store the data.
  * @param value - The data to store.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const setValue = async (value: any): Promise<void> => {
   try {
     await immudbClient.put(IMMUDB_PUT_URL, { data: value });

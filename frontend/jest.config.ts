@@ -12,6 +12,9 @@ const config: Config.InitialOptions = {
     '^@components/(.*)$': '<rootDir>/src/components/$1',
     '^@atoms/(.*)$': '<rootDir>/src/components/atoms/$1',
     '^@organisms/(.*)$': '<rootDir>/src/components/organisms/$1',
+    '^@templates/(.*)$': '<rootDir>/src/components/templates/$1',
+    '^@pages/(.*)$': '<rootDir>/src/components/pages/$1',
+    '^@helpers/(.*)$': '<rootDir>/src/helpers/$1',
     '^@hooks/(.*)$': '<rootDir>/src/helpers/hooks/$1',
   },
   transform: {

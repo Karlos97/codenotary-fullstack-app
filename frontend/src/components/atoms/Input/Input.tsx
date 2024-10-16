@@ -29,4 +29,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ),
 );
 
+Input.displayName = 'Button';
+
 export default Input;

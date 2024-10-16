@@ -6,12 +6,18 @@ import Select from '@atoms/Select/Select';
 import Button from '@atoms/Button/Button';
 import useErrorNotification from '@hooks/useErrorNotification';
 import ErrorNotification from '@atoms/ErrorNotification/ErrorNotification';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useApiMutation from '@/helpers/hooks/useMutation';
 
 const formSchema = z.object({
   accountNumber: z.string().min(1, 'Account Number is required'),
   accountName: z.string().min(1, 'Account Name is required'),
-  iban: z.string().min(1, 'IBAN is required'), // could be improved to real IBAN pattern, but it doesn't really matter in this example project
+  iban: z
+    .string()
+    .min(32, 'IBAN has to have 32 letters')
+    .regex(
+      /^[A-Z]{2}[A-Z0-9]{1,30}$/,
+      'IBAN must start with two capital letters followed by up to 30 alphanumeric characters',
+    ),
   address: z.string().min(1, 'Address is required'),
   amount: z
     .number({ invalid_type_error: 'Amount must be a number' })
@@ -23,34 +29,15 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
+enum TransactionType {
+  SENDING = 'sending',
+  RECEIVING = 'receiving',
+}
+
 const AccountingForm = () => {
-  const queryClient = useQueryClient();
   const { error, visible, triggerError } = useErrorNotification();
 
-  const mutation = useMutation({
-    mutationFn: async (data: FormData) => {
-      const response = await fetch(
-        `${import.meta.env.VITE_IMMUDB_LOCALHOST_BACKEND_LINK}/api/accounting`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        },
-      );
-      if (!response.ok) {
-        throw new Error('Failed to add record');
-      }
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['records'] });
-    },
-    onError: (error: { message: string }) => {
-      triggerError(error.message || 'Failed to add record. Please try again.');
-    },
-  });
+  const mutation = useApiMutation({ queryKey: ['records'], triggerError });
 
   const {
     register,
@@ -64,6 +51,10 @@ const AccountingForm = () => {
   const onSubmit = async (data: FormData) => {
     mutation.mutate(data);
     reset();
+  };
+
+  const formatTransactionType = (type: TransactionType) => {
+    return type.charAt(0).toUpperCase() + type.slice(1).toLowerCase();
   };
 
   return (
@@ -90,8 +81,14 @@ const AccountingForm = () => {
       <Select
         label="Type"
         options={[
-          { value: 'sending', label: 'Sending' },
-          { value: 'receiving', label: 'Receiving' },
+          {
+            value: TransactionType.SENDING,
+            label: formatTransactionType(TransactionType.SENDING),
+          },
+          {
+            value: TransactionType.RECEIVING,
+            label: formatTransactionType(TransactionType.RECEIVING),
+          },
         ]}
         {...register('type')}
         error={errors.type}

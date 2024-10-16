@@ -1,7 +1,7 @@
 import IconLeft from '@/components/atoms/Icons/IconLeft';
 import IconRight from '@/components/atoms/Icons/IconRight';
-import PaginationButton from '@/components/atoms/PaginationButton/PaginationButton';
-import { fetchRecords } from '@/helpers/fetchRecords';
+import PaginationButton from '@atoms/PaginationButton/PaginationButton';
+import { fetchRecords } from '@helpers/fetchRecords';
 import { useQuery } from '@tanstack/react-query';
 import { ReactNode, useState } from 'react';
 

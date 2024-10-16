@@ -53,7 +53,9 @@ describe('AccountingForm', () => {
         screen.getByText('Account Number is required'),
       ).toBeInTheDocument();
       expect(screen.getByText('Account Name is required')).toBeInTheDocument();
-      expect(screen.getByText('IBAN is required')).toBeInTheDocument();
+      expect(
+        screen.getByText('IBAN has to have 32 letters'),
+      ).toBeInTheDocument();
       expect(screen.getByText('Address is required')).toBeInTheDocument();
       expect(screen.getByText('Amount must be a number')).toBeInTheDocument();
       expect(screen.getByText('Type is required')).toBeInTheDocument();
@@ -68,7 +70,7 @@ describe('AccountingForm', () => {
       target: { value: 'John Doe' },
     });
     fireEvent.input(screen.getByLabelText(/IBAN/i), {
-      target: { value: 'DE89370400440532013000' },
+      target: { value: 'DE893704004405320130001234124652' },
     });
     fireEvent.input(screen.getByLabelText(/Address/i), {
       target: { value: '123 Street' },
@@ -86,7 +88,7 @@ describe('AccountingForm', () => {
       expect(mockMutationFn).toHaveBeenCalledWith({
         accountNumber: '123456',
         accountName: 'John Doe',
-        iban: 'DE89370400440532013000',
+        iban: 'DE893704004405320130001234124652',
         address: '123 Street',
         amount: 1000,
         type: 'sending',

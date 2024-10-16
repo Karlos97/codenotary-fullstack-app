@@ -5,7 +5,10 @@ import "dotenv/config";
 import accountingRouter from "./accountingRouter";
 
 const corsOptions = {
-  origin: "http://localhost:5173", // frontend URL
+  origin:
+    process.env.NODE_ENV === "production"
+      ? "http://localhost:4173"
+      : "http://localhost:5173", // frontend prod/dev
   methods: "GET,POST,PUT,DELETE",
   allowedHeaders: "Content-Type,Authorization",
 };

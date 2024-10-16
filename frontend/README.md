@@ -14,6 +14,31 @@ Technologies used in the project:
 - Typescript / eslint
 - Vite - builder speeding up development by building the project in the fly
 
+### How to start
+
+Local development is described here. Production is described in the root folder of this very project and is using docker with docker-compose.
+
+- yarn install
+- update .env file with envs:
+  - VITE_IMMUDB_LOCALHOST_BACKEND_LINK - backend link, f.e. http://127.0.0.1:3000
+  - VITE_IMMUDB_API_PUBLIC_KEY - cloud vault public api key
+  - VITE_IMMUDB_RECORDS_LINK - link used to fetch records f.e. https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/documents/search
+- yarn dev
+- get to localhost:5173 to get access to the UI
+- yarn storybook
+- get to localhost:6006 to checkup default components(not all of them, it's only an example)
+
+### Scripts
+
+`yarn dev` - to run development mode\
+`yarn build` - to build the project\
+`yarn start` - to start production mode\
+`yarn test` - to run unit tests\
+`yarn storybook` - to run storybook\
+`yarn build-storybook` - to build storybook stories\
+`yarn lint` - to run lint and search possible code smells\
+`yarn lint:fix` - to fix code smells which scripts can fix on their own\
+
 ### Comments
 
 The most time I've spend on configuration these technologies, but as it's already configured, It's giving a developer huge leverage to keep project simple, atomic, tested and well maintained.

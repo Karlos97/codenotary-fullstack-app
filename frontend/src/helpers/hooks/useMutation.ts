@@ -27,10 +27,18 @@ const useApiMutation = ({
           body: JSON.stringify(data),
         },
       );
+      const jsonResponse = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to add record');
+        const error = jsonResponse.error || '';
+
+        triggerError(
+          `Failed to send data with message: ${error}. Please try again.`,
+        );
+        throw new Error(error);
       }
-      return response.json();
+
+      return jsonResponse;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey });

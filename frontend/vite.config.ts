@@ -16,6 +16,15 @@ export default defineConfig({
       '@helpers': path.resolve(__dirname, './src/helpers'),
     },
   },
+  // if using dev in docker
+  // server: {
+  //   host: true,
+  //   port: 5173,
+  // },
+  preview: {
+    host: true,
+    port: 4173,
+  },
   css: {
     preprocessorOptions: {
       scss: {

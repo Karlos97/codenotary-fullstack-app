@@ -1,16 +1,28 @@
-version: '3.8'
+version: "3.8"
+
 services:
-  app:
-    build: .
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    environment:
+      - VITE_IMMUDB_LOCALHOST_BACKEND_LINK
+      - VITE_IMMUDB_API_PUBLIC_KEY
+      - VITE_IMMUDB_RECORDS_LINK
+    ports:
+      - "4173:4173"
+    depends_on:
+      - backend
+    restart: always
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      - PORT
+      - IMMUDB_API_KEY
+      - NODE_ENV
     ports:
       - "3000:3000"
-    environment:
-      - IMMUDB_HOST=immudb
-      - IMMUDB_PORT=8080
-      - PORT=3000
-    volumes:
-      - .:/usr/src/app
-    command: yarn dev
-
-volumes:
-  immudb_data:
+    restart: always

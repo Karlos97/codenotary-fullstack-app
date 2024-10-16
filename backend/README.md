@@ -15,7 +15,7 @@ Technologies used in the project:
 Local development is described here. Production is described in the root folder of this very project and is using docker with docker-compose.
 
 - yarn install
-- update .env file with env IMMUDB_API_KEY which is private key of cloud vault ( keep in mind that changing port from default one, may require changing it in other files)
+- update .env file with env IMMUDB_API_KEY which is private key of cloud vault ( keep in mind that changing port from default one(3000), may require changing it in other files), NODE_ENV - set to development or production depending on purpose
 - yarn dev
 - get to localhost:3000/swagger to get quick review of accessible endpoints
 - remember to keep cors options updated in case of changing ports of the frontend app

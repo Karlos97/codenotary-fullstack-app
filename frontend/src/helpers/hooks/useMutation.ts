@@ -3,6 +3,7 @@ import {
   UseMutationResult,
   useQueryClient,
 } from '@tanstack/react-query';
+import { immudbBackendLink } from '@helpers/constans';
 
 interface UseApiMutation {
   queryKey: string[];
@@ -17,16 +18,13 @@ const useApiMutation = ({
 
   return useMutation({
     mutationFn: async (data) => {
-      const response = await fetch(
-        `${import.meta.env.VITE_IMMUDB_LOCALHOST_BACKEND_LINK}/api/accounting`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
+      const response = await fetch(`${immudbBackendLink}/api/accounting`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify(data),
+      });
       const jsonResponse = await response.json();
 
       if (!response.ok) {

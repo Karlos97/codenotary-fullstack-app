@@ -20,7 +20,7 @@ Local development is described here. Production is described in the root folder 
 
 - yarn install
 - update .env file with envs:
-  - VITE_IMMUDB_LOCALHOST_BACKEND_LINK - backend link, f.e. http://127.0.0.1:3000
+  - VITE_IMMUDB_BACKEND_LINK - backend link, f.e. http://127.0.0.1:3000
   - VITE_IMMUDB_API_PUBLIC_KEY - cloud vault public api key
   - VITE_IMMUDB_RECORDS_LINK - link used to fetch records f.e. https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/documents/search
 - yarn dev

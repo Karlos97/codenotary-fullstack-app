@@ -1,28 +1,29 @@
 import { useState, useEffect } from 'react';
+import { errorVisibilityTime } from '@helpers/constans';
 
 const useErrorNotification = () => {
   const [error, setError] = useState<string | null>(null);
-  const [visible, setVisible] = useState<boolean>(false);
+  const [isErrorVisible, setIsErrorVisible] = useState<boolean>(false);
 
   const triggerError = (message: string) => {
     setError(message);
-    setVisible(true);
+    setIsErrorVisible(true);
   };
 
   useEffect(() => {
-    if (visible) {
+    if (isErrorVisible) {
       const timer = setTimeout(() => {
-        setVisible(false);
+        setIsErrorVisible(false);
         setError(null);
-      }, 3000);
+      }, errorVisibilityTime);
 
       return () => clearTimeout(timer);
     }
-  }, [visible]);
+  }, [isErrorVisible]);
 
   return {
     error,
-    visible,
+    isErrorVisible,
     triggerError,
   };
 };

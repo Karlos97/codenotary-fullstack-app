@@ -5,7 +5,7 @@ import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
 import "dotenv/config";
-import accountingRouter from "./accountingRouter";
+import accountingRouter from "./routes/accountingRoutes";
 
 const corsOptions = {
   origin:

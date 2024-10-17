@@ -8,6 +8,11 @@ import useErrorNotification from '@hooks/useErrorNotification';
 import ErrorNotification from '@atoms/ErrorNotification/ErrorNotification';
 import useApiMutation from '@/helpers/hooks/useMutation';
 
+enum TransactionType {
+  SENDING = 'sending',
+  RECEIVING = 'receiving',
+}
+
 const formSchema = z.object({
   accountNumber: z.string().min(1, 'Account Number is required'),
   accountName: z.string().min(1, 'Account Name is required'),
@@ -22,20 +27,15 @@ const formSchema = z.object({
   amount: z
     .number({ invalid_type_error: 'Amount must be a number' })
     .positive('Amount must be greater than zero'),
-  type: z.enum(['sending', 'receiving'], {
+  type: z.enum([TransactionType.SENDING, TransactionType.RECEIVING], {
     errorMap: () => ({ message: 'Type is required' }),
   }),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
-enum TransactionType {
-  SENDING = 'sending',
-  RECEIVING = 'receiving',
-}
-
 const AccountingForm = () => {
-  const { error, visible, triggerError } = useErrorNotification();
+  const { error, isErrorVisible, triggerError } = useErrorNotification();
 
   const mutation = useApiMutation({ queryKey: ['records'], triggerError });
 
@@ -94,7 +94,7 @@ const AccountingForm = () => {
         error={errors.type}
       />
       <Button type="submit">Add Record</Button>
-      <ErrorNotification error={error} visible={visible} />
+      {isErrorVisible && error && <ErrorNotification error={error} />}
     </form>
   );
 };

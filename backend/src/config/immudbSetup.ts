@@ -2,8 +2,8 @@ import axios, { AxiosInstance } from "axios";
 import https from "https";
 import "dotenv/config";
 
-const IMMUDB_PUT_URL = `https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/document`;
 // const IMMUDB_GET_URL = `https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/documents/search`;
+const IMMUDB_PUT_URL = `https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/document`;
 const IMMUDB_API_KEY = process.env.IMMUDB_API_KEY || "";
 
 if (!IMMUDB_API_KEY) {

@@ -1,3 +1,5 @@
+import { immudbPublicApiKey, immudbRecordsLink } from '@helpers/constans';
+
 export const fetchRecords = async ({
   page,
   perPage,
@@ -5,18 +7,15 @@ export const fetchRecords = async ({
   page: number;
   perPage: number;
 }) => {
-  if (
-    !import.meta.env.VITE_IMMUDB_RECORDS_LINK ||
-    !import.meta.env.VITE_IMMUDB_API_PUBLIC_KEY
-  ) {
+  if (!immudbRecordsLink || !immudbPublicApiKey) {
     throw new Error('IMMUDB link or key env variable was not declared!');
   }
 
-  const response = await fetch(import.meta.env.VITE_IMMUDB_RECORDS_LINK, {
+  const response = await fetch(immudbRecordsLink, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-API-Key': import.meta.env.VITE_IMMUDB_API_PUBLIC_KEY,
+      'X-API-Key': immudbPublicApiKey,
     },
     body: JSON.stringify({ page, perPage }),
   });

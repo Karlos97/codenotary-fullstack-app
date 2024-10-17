@@ -1,5 +1,6 @@
-import IconLeft from '@/components/atoms/Icons/IconLeft';
-import IconRight from '@/components/atoms/Icons/IconRight';
+import IconLeft from '@atoms/Icons/IconLeft';
+import IconRight from '@atoms/Icons/IconRight';
+import { Table, TableBody, TableRow, TableWrapper } from '@atoms/Table/Table';
 import PaginationButton from '@atoms/PaginationButton/PaginationButton';
 import { fetchRecords } from '@helpers/fetchRecords';
 import { useQuery } from '@tanstack/react-query';
@@ -59,6 +60,7 @@ const RecordsTable = () => {
   const { data, error, isLoading } = useQuery<Data>({
     queryKey: ['records', pageNumber, perPage],
     queryFn: () => fetchRecords({ page: pageNumber, perPage }),
+    enabled: !!pageNumber && !!perPage,
   });
 
   const defaultData = {
@@ -79,9 +81,9 @@ const RecordsTable = () => {
   }
 
   return (
-    <div className="rounded-lg border border-gray-300 dark:border-gray-400">
+    <TableWrapper>
       <div className="overflow-x-auto rounded-t-lg">
-        <table className="min-w-full divide-y-2 text-sm bg-gray-50 dark:bg-gray-400 divide-gray-50 dark:divide-gray-500">
+        <Table>
           <thead>
             <tr>
               <TableHeader>Id</TableHeader>
@@ -93,9 +95,8 @@ const RecordsTable = () => {
               <TableHeader>Type</TableHeader>
             </tr>
           </thead>
-
           {data?.revisions.length ? (
-            <tbody className="divide-y divide-gray-200 dark:divide-gray-500">
+            <TableBody>
               {data?.revisions.map(({ document: { _id, data } }) => {
                 const {
                   accountNumber,
@@ -107,10 +108,7 @@ const RecordsTable = () => {
                 } = data || defaultData;
 
                 return (
-                  <tr
-                    key={_id}
-                    className="bg-gray-50 dark:bg-gray-400 hover:bg-gray-200 dark:hover:bg-gray-500 "
-                  >
+                  <TableRow key={_id}>
                     <TableData>{_id}</TableData>
                     <TableData>{accountNumber}</TableData>
                     <TableData>{accountName}</TableData>
@@ -118,10 +116,10 @@ const RecordsTable = () => {
                     <TableData>{address}</TableData>
                     <TableData>{amount}</TableData>
                     <TableData>{type}</TableData>
-                  </tr>
+                  </TableRow>
                 );
               })}
-            </tbody>
+            </TableBody>
           ) : (
             <tr>
               <TableData className="text-center" colSpan={7}>
@@ -129,7 +127,7 @@ const RecordsTable = () => {
               </TableData>
             </tr>
           )}
-        </table>
+        </Table>
       </div>
 
       <div className="rounded-b-lg border-t border-gray-200 px-4 py-2 bg-gray-50 dark:bg-gray-400">
@@ -160,7 +158,7 @@ const RecordsTable = () => {
           </PaginationButton>
         </ol>
       </div>
-    </div>
+    </TableWrapper>
   );
 };
 

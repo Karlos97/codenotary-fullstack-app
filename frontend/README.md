@@ -46,4 +46,6 @@ There's also huge help of supporting libraries of tailwind. App is responsive an
 
 I've not dedicated more time than it was needed to write more tests or storybook stories. The project is more or less a PoC how I do build apps and why I do choose such technologies(shortly described above).
 
+I've intentionally didn't use an components like tanstack table to show up that I do know how to build tables.
+
 I've put all my exprience with this and many different libraries, compared them with each other and chosen the best ones. With such background, the project can easily grow.

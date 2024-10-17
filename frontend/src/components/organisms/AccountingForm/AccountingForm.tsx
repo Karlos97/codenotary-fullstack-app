@@ -14,7 +14,10 @@ enum TransactionType {
 }
 
 const formSchema = z.object({
-  accountNumber: z.string().min(1, 'Account Number is required'),
+  accountNumber: z
+    .string()
+    .min(1, 'Account Number is required')
+    .regex(/^\d+$/, 'Account Number must contain only digits'),
   accountName: z.string().min(1, 'Account Name is required'),
   iban: z
     .string()
@@ -61,6 +64,7 @@ const AccountingForm = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Input
         label="Account Number"
+        type="number"
         {...register('accountNumber')}
         error={errors.accountNumber}
       />

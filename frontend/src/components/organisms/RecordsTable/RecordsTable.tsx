@@ -18,14 +18,14 @@ interface Data {
 
 interface Record {
   _id: string;
-  timestamp: string;
-  id: number;
-  accountNumber: string;
-  accountName: string;
-  iban: string;
-  address: string;
-  amount: number;
-  type: string;
+  data?: {
+    accountNumber: string;
+    accountName: string;
+    iban: string;
+    address: string;
+    amount: number;
+    type: string;
+  };
 }
 const TableHeader = ({ children }: { children: ReactNode }) => (
   <th className="whitespace-nowrap px-4 py-2 font-medium text-slate-800 text-left">
@@ -61,6 +61,15 @@ const RecordsTable = () => {
     queryFn: () => fetchRecords({ page: pageNumber, perPage }),
   });
 
+  const defaultData = {
+    accountNumber: '',
+    accountName: '',
+    iban: '',
+    address: '',
+    amount: 0,
+    type: '',
+  };
+
   if (isLoading) {
     return <div className="flex justify-center">Loading...</div>;
   }
@@ -76,29 +85,46 @@ const RecordsTable = () => {
           <thead>
             <tr>
               <TableHeader>Id</TableHeader>
-              <TableHeader>Timestamp</TableHeader>
-              <TableHeader>Data object</TableHeader>
+              <TableHeader>Account Number</TableHeader>
+              <TableHeader>Account Name</TableHeader>
+              <TableHeader>IBAN</TableHeader>
+              <TableHeader>Address</TableHeader>
+              <TableHeader>Amount</TableHeader>
+              <TableHeader>Type</TableHeader>
             </tr>
           </thead>
 
           {data?.revisions.length ? (
             <tbody className="divide-y divide-gray-200 dark:divide-gray-500">
-              {data?.revisions.map(
-                ({ document: { _id, timestamp, ...rest } }) => (
+              {data?.revisions.map(({ document: { _id, data } }) => {
+                const {
+                  accountNumber,
+                  accountName,
+                  iban,
+                  address,
+                  amount,
+                  type,
+                } = data || defaultData;
+
+                return (
                   <tr
                     key={_id}
                     className="bg-gray-50 dark:bg-gray-400 hover:bg-gray-200 dark:hover:bg-gray-500 "
                   >
                     <TableData>{_id}</TableData>
-                    <TableData>{timestamp}</TableData>
-                    <TableData>{JSON.stringify(rest)}</TableData>
+                    <TableData>{accountNumber}</TableData>
+                    <TableData>{accountName}</TableData>
+                    <TableData>{iban}</TableData>
+                    <TableData>{address}</TableData>
+                    <TableData>{amount}</TableData>
+                    <TableData>{type}</TableData>
                   </tr>
-                ),
-              )}
+                );
+              })}
             </tbody>
           ) : (
             <tr>
-              <TableData className="text-center" colSpan={3}>
+              <TableData className="text-center" colSpan={7}>
                 This page is empty!
               </TableData>
             </tr>

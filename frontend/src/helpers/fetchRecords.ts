@@ -1,4 +1,4 @@
-import { immudbPublicApiKey, immudbRecordsLink } from '@helpers/constans';
+import { immudbBackendLink } from '@helpers/constans';
 
 export const fetchRecords = async ({
   page,
@@ -7,18 +7,9 @@ export const fetchRecords = async ({
   page: number;
   perPage: number;
 }) => {
-  if (!immudbRecordsLink || !immudbPublicApiKey) {
-    throw new Error('IMMUDB link or key env variable was not declared!');
-  }
-
-  const response = await fetch(immudbRecordsLink, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-API-Key': immudbPublicApiKey,
-    },
-    body: JSON.stringify({ page, perPage }),
-  });
+  const response = await fetch(
+    `${immudbBackendLink}/api/accounting?page=${page}&perPage=${perPage}`,
+  );
 
   if (!response.ok) {
     throw new Error('There was an error during fetching of records.');

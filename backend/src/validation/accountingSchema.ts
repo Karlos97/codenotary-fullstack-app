@@ -25,8 +25,13 @@ export const putAccountingSchema = z.object({
   }),
 });
 
-// Use in case of getting records via this dummy backend
-// export const getAccountingSchema = Joi.object({
-//   page: Joi.number().positive().required(),
-//   perPage: Joi.number().positive().required(),
-// });
+export const getAccountingSchema = z.object({
+  page: z.preprocess(
+    (val) => Number(val),
+    z.number().min(1).positive("Amount must be a positive number")
+  ),
+  perPage: z.preprocess(
+    (val) => Number(val),
+    z.number().min(1).positive("Amount must be a positive number")
+  ),
+});

@@ -1,7 +1,10 @@
 import { Router } from "express";
-import { addAccountingInfo } from "../controllers/accountingController";
+import {
+  addAccountingInfo,
+  getAccountingInfo,
+} from "../controllers/accountingController";
 
-const accountingRouter = Router();
+const accountingRoutes = Router();
 
 /**
  * @swagger
@@ -50,6 +53,38 @@ const accountingRouter = Router();
  *         description: Internal server error
  */
 
-accountingRouter.post("/", addAccountingInfo);
+accountingRoutes.post("/", addAccountingInfo);
 
-export default accountingRouter;
+/**
+ * @swagger
+ * /api/accounting:
+ *   get:
+ *     summary: Get accounting information
+ *     description: This endpoint allows users to get accounting information from cloud vault. It validates the input data against a defined schema and returns appropriate success or error messages.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               page:
+ *                 type: number
+ *                 description: Page number
+ *               perPage:
+ *                 type: number
+ *                 description: Elements per page
+ *             required:
+ *               - page
+ *               - perPage
+ *     responses:
+ *       201:
+ *         description: Accounting information successfully fetched
+ *       400:
+ *         description: Bad request due to validation error
+ *       500:
+ *         description: Internal server error
+ */
+accountingRoutes.get("/", getAccountingInfo);
+
+export default accountingRoutes;

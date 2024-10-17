@@ -1,8 +1,9 @@
 import axios, { AxiosInstance } from "axios";
 import https from "https";
 import "dotenv/config";
+import logger from "../logger";
 
-// const IMMUDB_GET_URL = `https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/documents/search`;
+const IMMUDB_GET_URL = `https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/documents/search`;
 const IMMUDB_PUT_URL = `https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/document`;
 const IMMUDB_API_KEY = process.env.IMMUDB_API_KEY || "";
 
@@ -26,31 +27,30 @@ const immudbClient: AxiosInstance = axios.create({
  * @param value - The data to store.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const setValue = async (value: any): Promise<void> => {
+export const setValueInVault = async (value: any): Promise<void> => {
   try {
     await immudbClient.put(IMMUDB_PUT_URL, { data: value });
   } catch (error) {
-    console.error(`Error setting data:`, error);
+    logger.error(`Error setting data: ${error}`);
     throw error;
   }
 };
 
-// THIS IS JUST AN EXAMPLE. FURTHER DESCRIPTION IN ACCOUNTING SCHEMA ROUTER
-// /**
-//  * Reads data from immudb Cloud using the GET endpoint.
-//  * @param key - The key of the data to retrieve.
-//  * @returns The retrieved data parsed as type T.
-//  */
-// export const getValue = async (params: {
-//   page: number;
-//   perPage: number;
-// }): Promise<void> => {
-//   try {
-//     const response = await immudbClient.post(IMMUDB_GET_URL, params);
+/**
+ * Reads data from immudb Cloud using the GET endpoint.
+ * @param key - The key of the data to retrieve.
+ * @returns The retrieved data parsed as type T.
+ */
+export const getValueFromVault = async (params: {
+  page: number;
+  perPage: number;
+}): Promise<void> => {
+  try {
+    const response = await immudbClient.post(IMMUDB_GET_URL, params);
 
-//     return response.data;
-//   } catch (error) {
-//     console.error(`Error getting data:`, error);
-//     throw error;
-//   }
-// };
+    return response.data;
+  } catch (error) {
+    logger.error(`Error getting data: ${error}`);
+    throw error;
+  }
+};

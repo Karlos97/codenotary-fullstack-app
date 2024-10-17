@@ -1,51 +1,40 @@
 # Description
 
-This is frontend part of codenotary recruitment task. It's using both backend api to add records and cloud vault to fetch records using public api key.
+This is the frontend part of the Codenotary recruitment task. It interacts with the backend API to add and fetch records.
 
-Technologies used in the project:
+## Technologies used in the project:
 
-- React - used for quick development and fast shipping of the features
-- Tanstack query - helper library responsible for fetching and caching data
-- Jest - testing library
-- Zod - form validation library
-- React Hook Form - form library
-- Storybook - components quick check-up
-- Tailwind - awesome library which speeds up developing by both: using classic css styling with intuitive naming system, setting up quick theme mode, and the best argument is internet full of lovely designs of component which can be adjusted on the fly
-- Typescript / eslint
-- Vite - builder speeding up development by building the project in the fly
+- **React** - for quick development and rapid feature delivery
+- **Tanstack Query** - helper library for fetching and caching data
+- **Jest** - testing library
+- **Zod** - form validation library
+- **React Hook Form** - for handling forms
+- **Storybook** - for component previews and quick checks
+- **Tailwind CSS** - a utility-first CSS library that accelerates development with intuitive naming, quick theme setup, and a wealth of open-source components
+- **TypeScript / ESLint** - for typing and code quality
+- **Vite** - a fast development server that builds the project on the fly
 
-### How to start
+### How to start locally
 
-Local development is described here. Production is described in the root folder of this very project and is using docker with docker-compose.
+Local development setup is described here. The production setup is detailed in the [root folder](../README.md) and uses Docker with Docker Compose.
 
-- yarn install
-- update .env file with envs:
-  - VITE_IMMUDB_BACKEND_LINK - backend link, f.e. http://127.0.0.1:3000
-  - VITE_IMMUDB_API_PUBLIC_KEY - cloud vault public api key
-  - VITE_IMMUDB_RECORDS_LINK - link used to fetch records f.e. https://vault.immudb.io/ics/api/v1/ledger/default/collection/default/documents/search
-- yarn dev
-- get to localhost:5173 to get access to the UI
-- yarn storybook
-- get to localhost:6006 to checkup default components(not all of them, it's only an example)
+- Update the `.env` file with:
+  - `VITE_IMMUDB_BACKEND_LINK`: the backend link, e.g., `http://127.0.0.1:3000`
+- Run `yarn install` to install dependencies.
+- Run `yarn dev` to start the frontend in development mode.
+- Access the UI at `localhost:5173`.
+- Run `yarn storybook` to start Storybook.
+- Access Storybook at `localhost:6006` to review example components (note: not all components are included).
+
+Keep in mind there’s a [branch](https://github.com/Karlos97/codenotary-fullstack-app/tree/MK/dev-version-with-public-key-on-frontend) utilizing a public key to fetch records (though it doesn’t fully meet the task requirements for unique account numbers), that could be f.e. used to lessen impact on backend, transfer get requests to vault instead.
 
 ### Scripts
 
-`yarn dev` - to run development mode\
-`yarn build` - to build the project\
-`yarn start` - to start production mode\
-`yarn test` - to run unit tests\
-`yarn storybook` - to run storybook\
-`yarn build-storybook` - to build storybook stories\
-`yarn lint` - to run lint and search possible code smells\
-`yarn lint:fix` - to fix code smells which scripts can fix on their own\
-
-### Comments
-
-The most time I've spend on configuration these technologies, but as it's already configured, It's giving a developer huge leverage to keep project simple, atomic, tested and well maintained.
-There's also huge help of supporting libraries of tailwind. App is responsive and supports dark / light theme.
-
-I've not dedicated more time than it was needed to write more tests or storybook stories. The project is more or less a PoC how I do build apps and why I do choose such technologies(shortly described above).
-
-I've intentionally didn't use an components like tanstack table to show up that I do know how to build tables.
-
-I've put all my exprience with this and many different libraries, compared them with each other and chosen the best ones. With such background, the project can easily grow.
+- `yarn dev` - to run development mode
+- `yarn build` - to build the project
+- `yarn start` - to start production mode
+- `yarn test` - to run unit tests
+- `yarn storybook` - to run Storybook
+- `yarn build-storybook` - to build Storybook stories
+- `yarn lint` - to run linting and check for code smells
+- `yarn lint:fix` - to fix lint issues automatically

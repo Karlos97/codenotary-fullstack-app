@@ -5,7 +5,8 @@ import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
 import "dotenv/config";
-import accountingRouter from "./routes/accountingRoutes";
+import accountingRoutes from "./routes/accountingRoutes";
+import { connectRedis } from "./config/redisSetup";
 
 const corsOptions = {
   origin:
@@ -18,9 +19,19 @@ const corsOptions = {
 
 const app = express();
 
+(async () => {
+  try {
+    await connectRedis();
+    console.log("Connected to Redis");
+  } catch (error) {
+    console.error("Failed to connect to Redis:", error);
+    process.exit(1);
+  }
+})();
+
 app.use(cors(corsOptions));
 app.use(json());
-app.use("/api/accounting", accountingRouter);
+app.use("/api/accounting", accountingRoutes);
 
 if (process.env.NODE_ENV !== "production") {
   const swaggerOptions = {

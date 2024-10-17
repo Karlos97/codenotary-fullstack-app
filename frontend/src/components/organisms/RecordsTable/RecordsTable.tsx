@@ -63,6 +63,14 @@ const RecordsTable = () => {
     enabled: !!pageNumber && !!perPage,
   });
 
+  if (isLoading) {
+    return <div className="flex justify-center">Loading...</div>;
+  }
+
+  if (error instanceof Error) {
+    return <div className="flex justify-center">Error: {error.message}</div>;
+  }
+
   const defaultData = {
     accountNumber: '',
     accountName: '',
@@ -72,13 +80,14 @@ const RecordsTable = () => {
     type: '',
   };
 
-  if (isLoading) {
-    return <div className="flex justify-center">Loading...</div>;
-  }
+  const onPaginationButtonClickHandler = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    value: number,
+  ) => {
+    e.preventDefault();
 
-  if (error instanceof Error) {
-    return <div className="flex justify-center">Error: {error.message}</div>;
-  }
+    setPageNumber(pageNumber + value);
+  };
 
   return (
     <TableWrapper>
@@ -133,11 +142,7 @@ const RecordsTable = () => {
       <div className="rounded-b-lg border-t border-gray-200 px-4 py-2 bg-gray-50 dark:bg-gray-400">
         <ol className="flex justify-end gap-1 text-xs font-medium">
           <PaginationButton
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-              e.preventDefault();
-
-              setPageNumber(pageNumber - 1);
-            }}
+            onClick={(e) => onPaginationButtonClickHandler(e, -1)}
             disabled={pageNumber === 1}
             isIcon
           >
@@ -146,11 +151,7 @@ const RecordsTable = () => {
           <PaginationButton isActive>{pageNumber}</PaginationButton>
 
           <PaginationButton
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-              e.preventDefault();
-
-              setPageNumber(pageNumber + 1);
-            }}
+            onClick={(e) => onPaginationButtonClickHandler(e, 1)}
             disabled={(data?.revisions?.length || 0) < perPage}
             isIcon
           >

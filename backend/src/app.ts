@@ -20,8 +20,8 @@ const app = express();
 
 app.use(cors(corsOptions));
 app.use(json());
-
 app.use("/api/accounting", accountingRouter);
+
 if (process.env.NODE_ENV !== "production") {
   const swaggerOptions = {
     swaggerDefinition: {

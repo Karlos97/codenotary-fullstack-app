@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 
 import { putAccountingSchema } from "./validation/accountingSchema";
 import { setValue } from "./immudbHelper";
+import logger from "./logger";
 
 const accountingRouter = Router();
 
@@ -56,15 +57,18 @@ accountingRouter.post("/", async (req: Request, res: Response) => {
   try {
     const { error, value } = putAccountingSchema.validate(req.body);
     if (error) {
-      res.status(400).json({ error: error.details[0].message });
+      const errorMessage = error.details[0].message;
+      res.status(400).json({ error: errorMessage });
+      logger.error(`This is an error log message: ${errorMessage}`);
       return;
     }
 
     await setValue(value);
+    logger.info("Accounting information added.");
 
     res.status(201).json({ message: "Accounting information added." });
   } catch (error) {
-    console.error("Error adding data:", error);
+    logger.error("Error adding data:", error);
     res.status(500).json({ error: "Failed to add data." });
   }
 });

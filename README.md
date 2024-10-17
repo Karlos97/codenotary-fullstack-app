@@ -51,14 +51,16 @@ Add to backend container:
 
 # Trouble shooting:
 
-In case of error: `ERROR [backend internal] load metadata for docker.io/library....`
-Run: `rm ~/.docker/config.json` source: `https://stackoverflow.com/questions/66912085/why-is-docker-compose-failing-with-error-internal-load-metadata-suddenly`
+In case of error: \
+`ERROR [backend internal] load metadata for docker.io/library....`\
+Run: `rm ~/.docker/config.json` \
+source: `https://stackoverflow.com/questions/66912085/why-is-docker-compose-failing-with-error-internal-load-metadata-suddenly`
 
 # Comments:
 
 ### Private hosting #bragging
 
-I used to host sites like this on my private home lab using https://hub.docker.com/r/steveltn/https-portal/dockerfile or cert bot. Great for writing PoC's. I've set the whole line with own gitlab, auto backups and so on. Thanks to my background I was able to create whole UPS(uninterruptible power supply) and electrical box for my server. I can share more details if anyone was interested.
+I used to host sites like this on my private home lab using https://hub.docker.com/r/steveltn/https-portal/dockerfile (this one has nginx, so user needs only proper config) or cert bot. I've set the whole line with gitlab hosted by me, auto backups on the apps and so on. Thanks to my background I was able to create whole UPS(uninterruptible power supply) and electrical box for my servers. I can share more details if anyone was interested.
 
 ### Cloud immudb
 

@@ -2,7 +2,7 @@ FROM node:20.9.0-alpine
 
 WORKDIR /frontend
 
-COPY frontend/package.json frontend/yarn.lock ./
+COPY frontend/package.json ./
 
 RUN yarn install
 

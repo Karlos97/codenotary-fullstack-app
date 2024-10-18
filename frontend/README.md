@@ -18,6 +18,7 @@ This is the frontend part of the Codenotary recruitment task. It interacts with 
 
 Local development setup is described here. The production setup is detailed in the [root folder](../README.md) and uses Docker with Docker Compose.
 
+- You will need node 20.9 to run this project
 - Update the `.env` file with:
   - `VITE_IMMUDB_BACKEND_LINK`: the backend link, e.g., `http://127.0.0.1:3000`
 - Run `yarn install` to install dependencies.

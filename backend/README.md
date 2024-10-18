@@ -16,6 +16,7 @@ This is the backend part of the Codenotary recruitment task. It’s a simple Nod
 Local development setup is described here. The production setup is detailed in the [root folder](../README.md) and uses Docker with Docker Compose.
 
 - For local development, either comment out the Docker Compose configuration for frontend and backend containers or use different ports and update environment variables and files using hardcoded ports accordingly.
+- You will need node 20.9 to run this project
 - Run `yarn install` to install dependencies.
 - Update the `.env` file with:
   - `IMMUDB_API_KEY`: the private key of the cloud vault

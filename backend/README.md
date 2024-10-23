@@ -34,7 +34,3 @@ Local development setup is described here. The production setup is detailed in t
 - `yarn build` - to build the project
 - `yarn start` - to start production mode
 - `yarn lint` - to run linting and check for possible code smells
-
-### Comments
-
-This is a simple backend service used to upload records to the vault. It validates and sends data to the vault. I have skipped adding tests since the same functionality is covered on the frontend. The app caches data from and to the vault to prevent uploading duplicate account numbers.
